@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "setup-dbs": "psql -f ./db/setup-dbs.sql"
+    "test": "jest",
+    "setup-dbs": "psql -f ./db/setup-dbs.sql",
+    "test-seed": "jest seed.test.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
     "url": "https://github.com/liamAppleton/Habit-Tracker-BE/issues"
   },
   "homepage": "https://github.com/liamAppleton/Habit-Tracker-BE#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
