@@ -73,5 +73,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('timestamp without time zone');
         });
     });
+    test('users table has updated_at column of timestamp', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type
+            FROM information_schema.columns
+            WHERE table_name = 'users'
+            AND column_name = 'updated_at'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('updated_at');
+          expect(column.data_type).toBe('timestamp without time zone');
+        });
+    });
   });
 });
