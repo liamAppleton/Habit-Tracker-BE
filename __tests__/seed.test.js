@@ -59,5 +59,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('character varying');
         });
     });
+    test('users table has created_at column of timestamp', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type
+            FROM information_schema.columns
+            WHERE table_name = 'users'
+            AND column_name = 'created_at'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('created_at');
+          expect(column.data_type).toBe('timestamp without time zone');
+        });
+    });
   });
 });
