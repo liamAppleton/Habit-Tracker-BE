@@ -1,4 +1,4 @@
-export const habits = [
+module.exports = [
   {
     id: 'dh1',
     user_id: 'dev1',

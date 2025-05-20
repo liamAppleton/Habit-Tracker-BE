@@ -1,4 +1,4 @@
-export const users = [
+module.exports = [
   {
     id: 'test1',
     username: 'testuser1',
