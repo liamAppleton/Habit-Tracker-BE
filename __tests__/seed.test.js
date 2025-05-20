@@ -31,5 +31,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('character varying');
         });
     });
+    test('users table has username column as the primary key', () => {
+      return db
+        .query(
+          `SELECT column_name
+            FROM information_schema.table_constraints AS tc
+            JOIN information_schema.key_column_usage AS kcu
+            ON tc.constraint_name = kcu.constraint_name
+            WHERE tc.constraint_type= 'PRIMARY KEY'
+            AND tc.table_name = 'users';`
+        )
+        .then(({ rows: [{ column_name }] }) => {
+          expect(column_name).toBe('username');
+        });
+    });
   });
 });
