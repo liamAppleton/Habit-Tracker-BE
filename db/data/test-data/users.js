@@ -1,6 +1,5 @@
 module.exports = [
   {
-    id: 'test1',
     username: 'testuser1',
     email: 'testuser1@example.com',
     password: 'hashedpassword123',
@@ -8,7 +7,6 @@ module.exports = [
     updated_at: '2025-05-19T08:00:00Z',
   },
   {
-    id: 'test2',
     username: 'testuser2',
     email: 'testuser2@example.com',
     password: 'hashedpassword456',
