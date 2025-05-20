@@ -2,16 +2,15 @@ const db = require('../connection.js');
 const format = require('pg-format');
 
 const createUsers = (userData) => {
-  console.log(userData);
   return db
     .query(
       `CREATE TABLE users
-        (user_id SERIAL PRIMARY KEY,
-        username VARCHAR NOT NULL UNIQUE,
+        (username VARCHAR NOT NULL,
         email VARCHAR NOT NULL UNIQUE,
         password VARCHAR NOT NULL,
         created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL)`
+        updated_at TIMESTAMP NOT NULL,
+        PRIMARY KEY (username))`
     )
     .then(() => {
       const formattedUsers = userData.map(
