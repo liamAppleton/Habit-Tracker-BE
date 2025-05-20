@@ -18,5 +18,18 @@ describe('seed', () => {
           expect(exists).toBe(true);
         });
     });
+    test('users table has username column of varying char', () => {
+      return db
+        .query(
+          `SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'users'
+            AND column_name = 'username'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('username');
+          expect(column.data_type).toBe('character varying');
+        });
+    });
   });
 });
