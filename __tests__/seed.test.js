@@ -18,7 +18,7 @@ describe('seed', () => {
           expect(exists).toBe(true);
         });
     });
-    test('users table has username column of varying char', () => {
+    test('users table has username column of varying character', () => {
       return db
         .query(
           `SELECT column_name, data_type, column_default
@@ -43,6 +43,20 @@ describe('seed', () => {
         )
         .then(({ rows: [{ column_name }] }) => {
           expect(column_name).toBe('username');
+        });
+    });
+    test('users table has email column of varying character', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'users'
+            AND column_name = 'email'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('email');
+          expect(column.data_type).toBe('character varying');
         });
     });
   });
