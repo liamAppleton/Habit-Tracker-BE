@@ -214,4 +214,18 @@ describe('seed', () => {
         });
     });
   });
+
+  describe('habit_logs table', () => {
+    test('habits_logs table exists', () => {
+      return db
+        .query(
+          `SELECT EXISTS (
+                SELECT FROM information_schema.tables
+                WHERE table_name = 'habit_logs');`
+        )
+        .then(({ rows: [{ exists }] }) => {
+          expect(exists).toBe(true);
+        });
+    });
+  });
 });

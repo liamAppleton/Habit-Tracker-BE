@@ -1,5 +1,6 @@
 const db = require('../connection.js');
 const format = require('pg-format');
+const { habitLogData } = require('../data/test-data/index.js');
 
 const createUsers = (userData) => {
   return db
@@ -74,12 +75,41 @@ const createHabits = (habitData) => {
     });
 };
 
+const createHabitLogs = (habitLogData) => {
+  return db
+    .query(
+      `
+    CREATE TABLE habit_logs
+    (log_id SERIAL PRIMARY KEY,
+    habit_id INT NOT NULL REFERENCES habits(habit_id),
+    date TIMESTAMP NOT NULL,
+    status VARCHAR NOT NULL)`
+    )
+    .then(() => {
+      const formattedHabitLogs = habitLogData.map(
+        ({ habit_id, date, status }) => {
+          return [habit_id, date, status];
+        }
+      );
+      const queryString = format(
+        `
+          INSERT INTO habit_logs
+        (habit_id, date, status)
+        VALUES %L RETURNING *`,
+        formattedHabitLogs
+      );
+      return db.query(queryString);
+    });
+};
+
 const seed = ({ userData, habitData, habitLogData }) => {
   return db
-    .query('DROP TABLE IF EXISTS habits')
+    .query('DROP TABLE IF EXISTS habit_logs')
+    .then(() => db.query('DROP TABLE IF EXISTS habits'))
     .then(() => db.query('DROP TABLE IF EXISTS users'))
     .then(() => createUsers(userData))
-    .then(() => createHabits(habitData));
+    .then(() => createHabits(habitData))
+    .then(() => createHabitLogs(habitLogData));
 };
 
 module.exports = seed;
