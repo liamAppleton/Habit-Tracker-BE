@@ -171,5 +171,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('character varying');
         });
     });
+    test('habits table has streak_count column as integer', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'habits'
+            AND column_name = 'streak_count'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('streak_count');
+          expect(column.data_type).toBe('integer');
+        });
+    });
   });
 });
