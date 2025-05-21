@@ -28,10 +28,58 @@ const createUsers = (userData) => {
     });
 };
 
+const createHabits = (habitData) => {
+  return db
+    .query(
+      `CREATE TABLE habits (
+        habit_id SERIAL PRIMARY KEY,
+        username VARCHAR NOT NULL REFERENCES users(username),
+        name VARCHAR NOT NULL,
+        frequency VARCHAR NOT NULL,
+        status VARCHAR NOT NULL,
+        streak_count INT NOT NULL,
+        created_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP NOT NULL
+);`
+    )
+    .then(() => {
+      const formattedHabits = habitData.map(
+        ({
+          username,
+          name,
+          frequency,
+          status,
+          streak_count,
+          created_at,
+          updated_at,
+        }) => {
+          return [
+            username,
+            name,
+            frequency,
+            status,
+            streak_count,
+            created_at,
+            updated_at,
+          ];
+        }
+      );
+      const queryString = format(
+        `INSERT INTO habits
+          (username, name, frequency, status, streak_count, created_at, updated_at)
+          VALUES %L RETURNING *`,
+        formattedHabits
+      );
+      return db.query(queryString);
+    });
+};
+
 const seed = ({ userData, habitData, habitLogData }) => {
   return db
-    .query('DROP TABLE IF EXISTS users')
-    .then(() => createUsers(userData));
+    .query('DROP TABLE IF EXISTS habits')
+    .then(() => db.query('DROP TABLE IF EXISTS users'))
+    .then(() => createUsers(userData))
+    .then(() => createHabits(habitData));
 };
 
 module.exports = seed;

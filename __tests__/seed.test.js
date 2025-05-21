@@ -88,4 +88,18 @@ describe('seed', () => {
         });
     });
   });
+
+  describe('habits table', () => {
+    test('habits table exists', () => {
+      return db
+        .query(
+          `SELECT EXISTS (
+                SELECT FROM information_schema.tables
+                WHERE table_name = 'habits');`
+        )
+        .then(({ rows: [{ exists }] }) => {
+          expect(exists).toBe(true);
+        });
+    });
+  });
 });
