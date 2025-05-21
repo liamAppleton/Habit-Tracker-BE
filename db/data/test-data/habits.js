@@ -1,7 +1,7 @@
 module.exports = [
   {
-    id: 'th1',
-    user_id: 'test1',
+    id: 1,
+    username: 'testuser1',
     name: 'Morning Yoga',
     frequency: 'Daily',
     status: 'In Progress',
@@ -10,8 +10,8 @@ module.exports = [
     updated_at: '2025-05-19T08:00:00Z',
   },
   {
-    id: 'th2',
-    user_id: 'test1',
+    id: 2,
+    username: 'testuser1',
     name: 'Read Book',
     frequency: 'Weekly',
     status: 'Not Started',
