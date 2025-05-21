@@ -129,5 +129,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('character varying');
         });
     });
+    test('habits table has frequency column of varying character', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'habits'
+            AND column_name = 'frequency'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('frequency');
+          expect(column.data_type).toBe('character varying');
+        });
+    });
   });
 });
