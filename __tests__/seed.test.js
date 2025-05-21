@@ -199,5 +199,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('timestamp without time zone');
         });
     });
+    test('habits table has updated_at column as timestamp', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'habits'
+            AND column_name = 'updated_at'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('updated_at');
+          expect(column.data_type).toBe('timestamp without time zone');
+        });
+    });
   });
 });
