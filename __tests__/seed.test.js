@@ -185,5 +185,19 @@ describe('seed', () => {
           expect(column.data_type).toBe('integer');
         });
     });
+    test('habits table has created_at column as timestamp', () => {
+      return db
+        .query(
+          `
+            SELECT column_name, data_type, column_default
+            FROM information_schema.columns
+            WHERE table_name = 'habits'
+            AND column_name = 'created_at'`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe('created_at');
+          expect(column.data_type).toBe('timestamp without time zone');
+        });
+    });
   });
 });
