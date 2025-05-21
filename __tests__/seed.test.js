@@ -227,5 +227,19 @@ describe('seed', () => {
           expect(exists).toBe(true);
         });
     });
+    test('habit_logs table has log_id column as the primary key', () => {
+      return db
+        .query(
+          `SELECT column_name
+            FROM information_schema.table_constraints AS tc
+            JOIN information_schema.key_column_usage AS kcu
+            ON tc.constraint_name = kcu.constraint_name
+            WHERE tc.constraint_type= 'PRIMARY KEY'
+            AND tc.table_name = 'habit_logs';`
+        )
+        .then(({ rows: [{ column_name }] }) => {
+          expect(column_name).toBe('log_id');
+        });
+    });
   });
 });
