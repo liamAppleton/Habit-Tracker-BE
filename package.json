@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "setup-dbs": "psql -f ./db/setup-dbs.sql",
-    "test-seed": "jest seed.test.js"
+    "test-seed": "jest seed.test.js",
+    "dev": "nodemon listen.js"
   },
   "repository": {
     "type": "git",
