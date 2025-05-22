@@ -20,7 +20,8 @@
   "homepage": "https://github.com/liamAppleton/Habit-Tracker-BE#readme",
   "description": "",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10"
   },
   "dependencies": {
     "cors": "^2.8.5",
