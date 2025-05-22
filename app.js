@@ -3,6 +3,11 @@ const app = express();
 const cors = require('cors');
 const endPoints = require('./endpoints.json');
 const { getUsers } = require('./controllers');
+const {
+  handleNotARouteError,
+  handlePsqlError,
+  handleServerError,
+} = require('./error-handlers/errorHandlers.js');
 
 app.use(cors());
 
@@ -13,5 +18,11 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/api/users', getUsers);
+
+app.all('*', handleNotARouteError);
+
+app.use(handlePsqlError);
+
+app.use(handleServerError);
 
 module.exports = app;
