@@ -10,7 +10,7 @@ const createUsers = (userData) => {
         email VARCHAR NOT NULL UNIQUE,
         password VARCHAR NOT NULL,
         created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP,
         PRIMARY KEY (username))`
     )
     .then(() => {
@@ -40,7 +40,7 @@ const createHabits = (habitData) => {
         status VARCHAR NOT NULL,
         streak_count INT NOT NULL,
         created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        updated_at TIMESTAMP
 );`
     )
     .then(() => {
