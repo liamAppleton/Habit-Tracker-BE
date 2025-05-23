@@ -1,5 +1,6 @@
-const { fetchUsers } = require('./users.models');
+const { fetchUsers, fetchUserByUsername } = require('./users.models');
 
 module.exports = {
   fetchUsers,
+  fetchUserByUsername,
 };
