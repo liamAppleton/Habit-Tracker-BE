@@ -1,5 +1,6 @@
 module.exports.handleNotARouteError = (req, res, next) => {
-  res.status(404).send({ status: 404, msg: 'not a round' });
+  console.log('404 reached');
+  res.status(404).send({ status: 404, msg: 'not a route' });
 };
 
 module.exports.handlePsqlError = (err, req, res, next) => {
