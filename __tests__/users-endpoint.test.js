@@ -14,7 +14,6 @@ describe('GET /api/users', () => {
       .expect(200)
       .then(({ body: { users } }) => {
         expect(users.length).not.toBe(0);
-
         users.forEach((user) => {
           expect(user).toEqual(
             expect.objectContaining({
@@ -25,6 +24,23 @@ describe('GET /api/users', () => {
               updated_at: expect.anything(),
             })
           );
+        });
+      });
+  });
+});
+
+describe('GET /api/users/:username', () => {
+  test('200: Responds with a user object', () => {
+    return request(app)
+      .get('/api/users/testuser1')
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user).toEqual({
+          username: 'testuser1',
+          email: 'testuser1@example.com',
+          password: 'hashedpassword123',
+          created_at: '2025-11-23T00:00:00.000Z',
+          updated_at: '2025-11-23T00:00:00.000Z',
         });
       });
   });
