@@ -6,6 +6,7 @@ const { getUsers, getUserByUsername } = require('./controllers');
 const {
   handleNotARouteError,
   handlePsqlError,
+  handleCustomError,
   handleServerError,
 } = require('./error-handlers/errorHandlers');
 
@@ -24,6 +25,8 @@ app.get('/api/users/:username', getUserByUsername);
 app.all('*', handleNotARouteError);
 
 app.use(handlePsqlError);
+
+app.use(handleCustomError);
 
 app.use(handleServerError);
 
