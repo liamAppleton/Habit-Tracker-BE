@@ -6,8 +6,8 @@ module.exports = [
     frequency: 'Daily',
     status: 'In Progress',
     streak_count: 5,
-    created_at: '2025-05-15T08:00:00Z',
-    updated_at: '2025-05-19T08:00:00Z',
+    created_at: '2025-11-20T00:00:00.000Z',
+    updated_at: '2025-11-23T00:00:00.000Z',
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ module.exports = [
     frequency: 'Weekly',
     status: 'Not Started',
     streak_count: 0,
-    created_at: '2025-05-18T08:00:00Z',
-    updated_at: '2025-05-19T08:00:00Z',
+    created_at: '2025-11-23T00:00:00.000Z',
+    updated_at: '2025-11-23T00:00:00.000Z',
   },
 ];

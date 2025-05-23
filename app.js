@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const endPoints = require('./endpoints.json');
-const { getUsers } = require('./controllers');
+const { getUsers, getUserByUsername } = require('./controllers');
 const {
   handleNotARouteError,
   handlePsqlError,
+  handleCustomError,
   handleServerError,
-} = require('./error-handlers/errorHandlers.js');
+} = require('./error-handlers/errorHandlers');
 
 app.use(cors());
 
@@ -19,9 +20,13 @@ app.get('/api', (req, res) => {
 
 app.get('/api/users', getUsers);
 
+app.get('/api/users/:username', getUserByUsername);
+
 app.all('*', handleNotARouteError);
 
 app.use(handlePsqlError);
+
+app.use(handleCustomError);
 
 app.use(handleServerError);
 

@@ -1,6 +1,5 @@
 const db = require('../connection.js');
 const format = require('pg-format');
-const { habitLogData } = require('../data/test-data/index.js');
 
 const createUsers = (userData) => {
   return db
@@ -82,7 +81,7 @@ const createHabitLogs = (habitLogData) => {
     CREATE TABLE habit_logs
     (log_id SERIAL PRIMARY KEY,
     habit_id INT NOT NULL REFERENCES habits(habit_id),
-    date TIMESTAMP NOT NULL,
+    date VARCHAR NOT NULL,
     status VARCHAR NOT NULL)`
     )
     .then(() => {
