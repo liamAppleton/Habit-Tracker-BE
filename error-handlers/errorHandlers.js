@@ -9,6 +9,12 @@ module.exports.handlePsqlError = (err, req, res, next) => {
   } else next(err);
 };
 
+module.exports.handleCustomError = (err, req, res, next) => {
+  if (err.status) {
+    res.status(err.status).send({ status: err.status, msg: err.msg });
+  } else next(err);
+};
+
 module.exports.handleServerError = (err, req, res, next) => {
   console.log(err);
   res.status(500).send({ msg: 'internal server error' });
