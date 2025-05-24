@@ -17,7 +17,9 @@ exports.getUserByUsername = (req, res, next) => {
 
 exports.postUser = (req, res, next) => {
   const user = req.body;
-  addUser(user).then((user) => {
-    res.status(201).send({ user });
-  });
+  addUser(user)
+    .then((user) => {
+      res.status(201).send({ user });
+    })
+    .catch((err) => next(err));
 };
