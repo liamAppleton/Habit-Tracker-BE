@@ -54,3 +54,33 @@ describe('GET /api/users/:username', () => {
       });
   });
 });
+
+describe('POST /api/users', () => {
+  let newUser;
+
+  beforeEach(() => {
+    newUser = {
+      username: 'superNaga',
+      email: 'superNaga@example.com',
+      password: 'password123',
+    };
+  });
+
+  test('201: Responds with the posted user', () => {
+    return request(app)
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
+      .then(({ body: { user } }) => {
+        expect(user).toEqual(
+          expect.objectContaining({
+            username: 'superNaga',
+            email: 'superNaga@example.com',
+            password: 'password123',
+            created_at: expect.any(String),
+            updated_at: null,
+          })
+        );
+      });
+  });
+});
