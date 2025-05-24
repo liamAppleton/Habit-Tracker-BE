@@ -83,4 +83,15 @@ describe('POST /api/users', () => {
         );
       });
   });
+  test('400: Responds with "bad request" when request body is missing fields', () => {
+    delete newUser.username;
+    return request(app)
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
