@@ -95,3 +95,15 @@ describe('POST /api/users', () => {
       });
   });
 });
+
+describe('PATCH /api/users/:username', () => {
+  test('200: Responds with the updated user object', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ email: 'testuserpatched@example.com' })
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user.email).toBe('testuserpatched@example.com');
+      });
+  });
+});
