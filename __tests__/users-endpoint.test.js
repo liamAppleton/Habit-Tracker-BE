@@ -95,3 +95,45 @@ describe('POST /api/users', () => {
       });
   });
 });
+
+describe('PATCH /api/users/:username', () => {
+  test('200: Responds with the updated user object', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ email: 'testuserpatched@example.com' })
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user.email).toBe('testuserpatched@example.com');
+      });
+  });
+  test('400: Responds with "bad request" when passed an invalid field to updated', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ banana: 'testuserpatched@example.com' })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('400: Responds with "invalid email address" when passed an invalid email address', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ email: 'banana' })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('invalid email address');
+      });
+  });
+  test('404: Responds with "user not found" when passing an username that does not exist', () => {
+    return request(app)
+      .patch('/api/users/banana')
+      .send({ email: 'testuserpatched@example.com' })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
+});

@@ -1,4 +1,9 @@
-const { fetchUsers, fetchUserByUsername, addUser } = require('../models');
+const {
+  fetchUsers,
+  fetchUserByUsername,
+  addUser,
+  updateUserByUsername,
+} = require('../models');
 
 exports.getUsers = (req, res, next) => {
   fetchUsers().then((users) => {
@@ -20,6 +25,15 @@ exports.postUser = (req, res, next) => {
   addUser(user)
     .then((user) => {
       res.status(201).send({ user });
+    })
+    .catch((err) => next(err));
+};
+
+exports.patchUserByUsername = (req, res, next) => {
+  const { username } = req.params;
+  updateUserByUsername(username, req.body)
+    .then((user) => {
+      res.status(200).send({ user });
     })
     .catch((err) => next(err));
 };
