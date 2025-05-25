@@ -116,4 +116,14 @@ describe('PATCH /api/users/:username', () => {
         expect(body.msg).toBe('bad request');
       });
   });
+  test('404: Responds with "user not found" when passing an username that does not exist', () => {
+    return request(app)
+      .patch('/api/users/banana')
+      .send({ email: 'test' })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
 });
