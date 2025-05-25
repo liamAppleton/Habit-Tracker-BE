@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const endPoints = require('./endpoints.json');
-const { getUsers, getUserByUsername } = require('./controllers');
+const { getUsers, getUserByUsername, postUser } = require('./controllers');
 const {
   handleNotARouteError,
   handlePsqlError,
@@ -21,6 +21,8 @@ app.get('/api', (req, res) => {
 app.get('/api/users', getUsers);
 
 app.get('/api/users/:username', getUserByUsername);
+
+app.post('/api/users', postUser);
 
 app.all('*', handleNotARouteError);
 
