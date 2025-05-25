@@ -1,7 +1,13 @@
-const { fetchUsers, fetchUserByUsername, addUser } = require('./users.models');
+const {
+  fetchUsers,
+  fetchUserByUsername,
+  addUser,
+  updateUserByUsername,
+} = require('./users.models');
 
 module.exports = {
   fetchUsers,
   fetchUserByUsername,
   addUser,
+  updateUserByUsername,
 };

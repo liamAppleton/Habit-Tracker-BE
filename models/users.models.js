@@ -30,3 +30,26 @@ exports.addUser = ({ username, email, password }) => {
     return rows[0];
   });
 };
+
+exports.updateUserByUsername = (username, body) => {
+  const valueToUpdate = Object.values(body)[0];
+  const fieldToUpdate = Object.keys(body)[0];
+
+  const allowedFields = ['email', 'password'];
+  if (!allowedFields.includes(fieldToUpdate)) {
+    return Promise.reject({ status: 400, msg: 'bad request' });
+  }
+
+  return db
+    .query(
+      `
+    UPDATE users
+    SET ${fieldToUpdate} = $1
+    WHERE username = $2
+    RETURNING *`,
+      [valueToUpdate, username]
+    )
+    .then(({ rows }) => {
+      return rows[0];
+    });
+};
