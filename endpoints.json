@@ -22,5 +22,15 @@
     "created_at": "2025-11-17T00:00:00.000Z",
     "updated_at": "2025-11-23T00:00:00.000Z"
   }
+  },
+  "POST /api/users": {
+    "description": "adds a user to the data base and responds with the added user",
+    "exampleResponse": [{
+    "username": "superNaga",
+    "email": "superNaga@example.com",
+    "password": "hashedpassword789",
+    "created_at": "2025-11-17T00:00:00.000Z",
+    "updated_at": "2025-11-23T00:00:00.000Z"
+  }]
   }
 }
