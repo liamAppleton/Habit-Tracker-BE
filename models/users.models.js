@@ -1,5 +1,6 @@
 const format = require('pg-format');
 const db = require('../db/connection.js');
+const { throwError } = require('../utils/utils.js');
 
 exports.fetchUsers = () => {
   return db.query('SELECT * FROM users').then(({ rows }) => {
@@ -37,7 +38,11 @@ exports.updateUserByUsername = (username, body) => {
 
   const allowedFields = ['email', 'password'];
   if (!allowedFields.includes(fieldToUpdate)) {
-    return Promise.reject({ status: 400, msg: 'bad request' });
+    return throwError(400, 'bad request');
+  }
+
+  if (!valueToUpdate.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    return throwError(400, 'invalid email address');
   }
 
   return db
@@ -51,7 +56,7 @@ exports.updateUserByUsername = (username, body) => {
     )
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return Promise.reject({ status: 404, msg: 'user not found' });
+        return throwError(404, 'user not found');
       }
       return rows[0];
     });
