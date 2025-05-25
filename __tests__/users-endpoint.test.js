@@ -106,4 +106,14 @@ describe('PATCH /api/users/:username', () => {
         expect(user.email).toBe('testuserpatched@example.com');
       });
   });
+  test('400: Responds with "bad request" when passed an invalid field to updated', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ banana: 'testuserpatched@example.com' })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
