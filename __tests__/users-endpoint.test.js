@@ -116,10 +116,20 @@ describe('PATCH /api/users/:username', () => {
         expect(body.msg).toBe('bad request');
       });
   });
+  test('400: Responds with "invalid email address" when passed an invalid email address', () => {
+    return request(app)
+      .patch('/api/users/testuser1')
+      .send({ email: 'banana' })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('invalid email address');
+      });
+  });
   test('404: Responds with "user not found" when passing an username that does not exist', () => {
     return request(app)
       .patch('/api/users/banana')
-      .send({ email: 'test' })
+      .send({ email: 'testuserpatched@example.com' })
       .expect(404)
       .then(({ body }) => {
         expect(body.status).toBe(404);
