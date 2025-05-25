@@ -12,8 +12,7 @@ exports.fetchUserByUsername = (username) => {
   return db
     .query('SELECT * FROM users WHERE username = $1', [username])
     .then(({ rows }) => {
-      if (rows.length === 0)
-        return Promise.reject({ status: 404, msg: 'user not found' });
+      if (rows.length === 0) return throwError(404, 'user not found');
       return rows[0];
     });
 };
