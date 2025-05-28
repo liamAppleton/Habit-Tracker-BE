@@ -21,9 +21,9 @@ exports.addUser = ({ username, email, password }) => {
   const queryString = format(
     `
     INSERT INTO users
-    (username, email, password, created_at, updated_at)
+    (username, email, password, created_at)
     VALUES %L RETURNING *`,
-    [[username, email, password, new Date(), null]]
+    [[username, email, password, new Date()]]
   );
 
   return db.query(queryString).then(({ rows }) => {
