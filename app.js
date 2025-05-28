@@ -7,6 +7,7 @@ const {
   getUserByUsername,
   postUser,
   patchUserByUsername,
+  getHabits,
 } = require('./controllers');
 const {
   handleNotARouteError,
@@ -30,6 +31,8 @@ app.get('/api/users/:username', getUserByUsername);
 app.post('/api/users', postUser);
 
 app.patch('/api/users/:username', patchUserByUsername);
+
+app.get('/api/habits', getHabits);
 
 app.all('*', handleNotARouteError);
 
