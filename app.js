@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const endPoints = require('./endpoints.json');
 const {
+  getEndpoints,
   getUsers,
   getUserByUsername,
   postUser,
@@ -20,9 +20,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-  res.status(200).send(endPoints);
-});
+app.get('/api', getEndpoints);
 
 app.get('/api/users', getUsers);
 
