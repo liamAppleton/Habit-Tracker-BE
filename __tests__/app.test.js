@@ -18,3 +18,14 @@ describe('GET /api', () => {
       });
   });
 });
+
+describe('Not a route', () => {
+  test('404: Responds with "not a route"', () => {
+    return request(app)
+      .get('/banana')
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('not a route');
+      });
+  });
+});
