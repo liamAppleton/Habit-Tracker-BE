@@ -1,3 +1,4 @@
+const { getEndpoints } = require('./endPoints.controllers');
 const {
   getUsers,
   getUserByUsername,
@@ -7,6 +8,7 @@ const {
 const { getHabits } = require('./habits.controllers');
 
 module.exports = {
+  getEndpoints,
   getUsers,
   getUserByUsername,
   postUser,
