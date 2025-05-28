@@ -21,7 +21,6 @@ describe('GET /api/users', () => {
               email: expect.any(String),
               password: expect.any(String),
               created_at: expect.any(String),
-              updated_at: expect.anything(),
             })
           );
         });
@@ -40,7 +39,6 @@ describe('GET /api/users/:username', () => {
           email: 'testuser1@example.com',
           password: 'hashedpassword123',
           created_at: '2025-11-23T00:00:00.000Z',
-          updated_at: '2025-11-23T00:00:00.000Z',
         });
       });
   });
@@ -78,7 +76,6 @@ describe('POST /api/users', () => {
             email: 'superNaga@example.com',
             password: 'password123',
             created_at: expect.any(String),
-            updated_at: null,
           })
         );
       });

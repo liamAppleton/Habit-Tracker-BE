@@ -9,18 +9,17 @@ const createUsers = (userData) => {
         email VARCHAR NOT NULL UNIQUE,
         password VARCHAR NOT NULL,
         created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP,
         PRIMARY KEY (username))`
     )
     .then(() => {
       const formattedUsers = userData.map(
-        ({ username, email, password, created_at, updated_at }) => {
-          return [username, email, password, created_at, updated_at];
+        ({ username, email, password, created_at }) => {
+          return [username, email, password, created_at];
         }
       );
       const queryString = format(
         `INSERT INTO users
-            (username, email, password, created_at, updated_at)
+            (username, email, password, created_at)
             VALUES %L RETURNING *`,
         formattedUsers
       );
