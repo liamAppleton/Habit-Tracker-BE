@@ -1,14 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const {
-  getEndpoints,
-  getUsers,
-  getUserByUsername,
-  postUser,
-  patchUserByUsername,
-  getHabits,
-} = require('./controllers');
+const apiRouter = require('./routes/apiRouter');
 const {
   handleNotARouteError,
   handlePsqlError,
@@ -20,17 +13,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/api', getEndpoints);
-
-app.get('/api/users', getUsers);
-
-app.get('/api/users/:username', getUserByUsername);
-
-app.post('/api/users', postUser);
-
-app.patch('/api/users/:username', patchUserByUsername);
-
-app.get('/api/habits', getHabits);
+app.use('/api', apiRouter);
 
 app.all('*', handleNotARouteError);
 
