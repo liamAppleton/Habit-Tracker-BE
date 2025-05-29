@@ -74,6 +74,15 @@ describe('GET /api/users/:username/habits', () => {
         });
       });
   });
+  test('400: Responds with "user not found" when passed a username that does not exist', () => {
+    return request(app)
+      .get('/api/users/banana/habits')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
 });
 
 describe('POST /api/users', () => {
