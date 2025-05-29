@@ -8,7 +8,9 @@ exports.getHabits = (req, res, next) => {
 
 exports.getHabitById = (req, res, next) => {
   const { habit_id } = req.params;
-  fetchHabitById(habit_id).then((habit) => {
-    res.status(200).send({ habit });
-  });
+  fetchHabitById(habit_id)
+    .then((habit) => {
+      res.status(200).send({ habit });
+    })
+    .catch((err) => next(err));
 };
