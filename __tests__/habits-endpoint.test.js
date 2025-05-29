@@ -29,3 +29,21 @@ describe('GET /api/habits', () => {
       });
   });
 });
+
+describe('GET /api/habits/:habit_id', () => {
+  test('200: Responds with a habit object', () => {
+    return request(app)
+      .get('/api/habits/1')
+      .expect(200)
+      .then(({ body: { habit } }) => {
+        expect(habit).toEqual({
+          habit_id: 1,
+          username: 'testuser1',
+          name: 'Morning Yoga',
+          frequency: 'Daily',
+          streak_count: 5,
+          created_at: '2025-11-20T00:00:00.000Z',
+        });
+      });
+  });
+});
