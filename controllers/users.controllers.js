@@ -1,6 +1,7 @@
 const {
   fetchUsers,
   fetchUserByUsername,
+  fetchHabitsByUsername,
   addUser,
   updateUserByUsername,
 } = require('../models');
@@ -18,6 +19,13 @@ exports.getUserByUsername = (req, res, next) => {
       res.status(200).send({ user });
     })
     .catch((err) => next(err));
+};
+
+exports.getHabitsByUsername = (req, res, next) => {
+  const { username } = req.params;
+  fetchHabitsByUsername(username).then((habits) => {
+    res.status(200).send({ habits });
+  });
 };
 
 exports.postUser = (req, res, next) => {
