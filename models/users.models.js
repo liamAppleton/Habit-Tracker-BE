@@ -17,6 +17,14 @@ exports.fetchUserByUsername = (username) => {
     });
 };
 
+exports.fetchHabitsByUsername = (username) => {
+  return db
+    .query(`SELECT * FROM habits WHERE username = $1`, [username])
+    .then(({ rows }) => {
+      return rows;
+    });
+};
+
 exports.addUser = ({ username, email, password }) => {
   const queryString = format(
     `

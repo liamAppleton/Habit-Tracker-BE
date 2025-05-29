@@ -53,6 +53,29 @@ describe('GET /api/users/:username', () => {
   });
 });
 
+describe('GET /api/users/:username/habits', () => {
+  test('200: Responds with an array of habit objects for the given username', () => {
+    return request(app)
+      .get('/api/users/testuser1/habits')
+      .expect(200)
+      .then(({ body: { habits } }) => {
+        expect(habits.length).not.toBe(0);
+        habits.forEach((habit) => {
+          expect(habit).toEqual(
+            expect.objectContaining({
+              habit_id: expect.any(Number),
+              username: 'testuser1',
+              name: expect.any(String),
+              frequency: expect.any(String),
+              streak_count: expect.any(Number),
+              created_at: expect.any(String),
+            })
+          );
+        });
+      });
+  });
+});
+
 describe('POST /api/users', () => {
   let newUser;
 
