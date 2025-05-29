@@ -21,6 +21,7 @@ exports.fetchHabitsByUsername = (username) => {
   return db
     .query(`SELECT * FROM habits WHERE username = $1`, [username])
     .then(({ rows }) => {
+      if (rows.length === 0) return throwError(404, 'user not found');
       return rows;
     });
 };

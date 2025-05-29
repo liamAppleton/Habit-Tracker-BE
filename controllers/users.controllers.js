@@ -23,9 +23,11 @@ exports.getUserByUsername = (req, res, next) => {
 
 exports.getHabitsByUsername = (req, res, next) => {
   const { username } = req.params;
-  fetchHabitsByUsername(username).then((habits) => {
-    res.status(200).send({ habits });
-  });
+  fetchHabitsByUsername(username)
+    .then((habits) => {
+      res.status(200).send({ habits });
+    })
+    .catch((err) => next(err));
 };
 
 exports.postUser = (req, res, next) => {
