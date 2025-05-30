@@ -17,7 +17,9 @@ exports.getHabitById = (req, res, next) => {
 
 exports.postHabit = (req, res, next) => {
   const habit = req.body;
-  addHabit(habit).then((habit) => {
-    res.status(200).send({ habit });
-  });
+  addHabit(habit)
+    .then((habit) => {
+      res.status(200).send({ habit });
+    })
+    .catch((err) => next(err));
 };
