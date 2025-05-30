@@ -1,5 +1,5 @@
 const db = require('../db/connection.js');
-const { throwError } = require('../utils/utils.js');
+const { throwError, checkExists } = require('../utils/utils.js');
 const format = require('pg-format');
 
 exports.fetchHabits = () => {
@@ -25,7 +25,15 @@ exports.addHabit = ({ username, name, frequency }) => {
   VALUES %L RETURNING *`,
     [[username, name, frequency, 0, new Date()]]
   );
-  return db.query(queryString).then(({ rows }) => {
-    return rows[0];
-  });
+
+  return checkExists('users', 'username', username)
+    .then((exists) => {
+      if (!exists) {
+        throw { status: 404, msg: 'user not found' };
+      }
+      return db.query(queryString);
+    })
+    .then(({ rows }) => {
+      return rows[0];
+    });
 };
