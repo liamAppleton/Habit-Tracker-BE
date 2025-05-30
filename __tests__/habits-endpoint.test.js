@@ -104,4 +104,15 @@ describe('POST /api/habits', () => {
         expect(body.msg).toBe('bad request');
       });
   });
+  test('400: Responds with "user not found" when passed a username that does not exist', () => {
+    newHabit.username = 'banana';
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
 });
