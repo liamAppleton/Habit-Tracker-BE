@@ -1,6 +1,5 @@
 const format = require('pg-format');
 const db = require('../db/connection.js');
-const { throwError } = require('../utils/utils.js');
 
 exports.fetchUsers = () => {
   return db.query('SELECT * FROM users').then(({ rows }) => {
@@ -12,7 +11,7 @@ exports.fetchUserByUsername = (username) => {
   return db
     .query('SELECT * FROM users WHERE username = $1', [username])
     .then(({ rows }) => {
-      if (rows.length === 0) return throwError(404, 'user not found');
+      if (rows.length === 0) throw { status: 404, msg: 'user not found' };
       return rows[0];
     });
 };
@@ -21,7 +20,7 @@ exports.fetchHabitsByUsername = (username) => {
   return db
     .query(`SELECT * FROM habits WHERE username = $1`, [username])
     .then(({ rows }) => {
-      if (rows.length === 0) return throwError(404, 'user not found');
+      if (rows.length === 0) throw { status: 404, msg: 'user not found' };
       return rows;
     });
 };
@@ -46,11 +45,11 @@ exports.updateUserByUsername = (username, body) => {
 
   const allowedFields = ['email', 'password'];
   if (!allowedFields.includes(fieldToUpdate)) {
-    return throwError(400, 'bad request');
+    throw { status: 400, msg: 'bad request' };
   }
 
   if (!valueToUpdate.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-    return throwError(400, 'invalid email address');
+    throw { status: 400, msg: 'invalid email address' };
   }
 
   return db
@@ -64,7 +63,7 @@ exports.updateUserByUsername = (username, body) => {
     )
     .then(({ rows }) => {
       if (rows.length === 0) {
-        return throwError(404, 'user not found');
+        throw { status: 404, msg: 'user not found' };
       }
       return rows[0];
     });

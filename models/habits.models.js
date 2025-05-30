@@ -1,5 +1,5 @@
 const db = require('../db/connection.js');
-const { throwError, checkExists } = require('../utils/utils.js');
+const { checkExists } = require('../utils/utils.js');
 const format = require('pg-format');
 
 exports.fetchHabits = () => {
@@ -12,7 +12,7 @@ exports.fetchHabitById = (habit_id) => {
   return db
     .query('SELECT * FROM habits WHERE habit_id = $1', [habit_id])
     .then(({ rows }) => {
-      if (rows.length === 0) return throwError(404, 'habit not found');
+      if (rows.length === 0) throw { status: 404, msg: 'habit not found' };
       return rows[0];
     });
 };
