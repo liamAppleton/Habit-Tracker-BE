@@ -74,5 +74,16 @@
     "streak_count": 0,
     "created_at": "2025-11-09T00:00:00.000Z"
     }
+  },
+  "POST /api/habits": {
+    "description": "adds a habit to the database and responds with the added habit",
+    "exampleResponse": {
+    "habit_id": 4,
+    "username": "devuser1",
+    "name": "Exercise",
+    "frequency": "Weekly",
+    "streak_count": 0,
+    "created_at": "2025-11-09T00:00:00.000Z"
+    }
   }
 }

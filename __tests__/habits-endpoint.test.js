@@ -65,3 +65,54 @@ describe('GET /api/habits/:habit_id', () => {
       });
   });
 });
+
+describe('POST /api/habits', () => {
+  let newHabit;
+  beforeEach(() => {
+    newHabit = {
+      username: 'testuser1',
+      name: 'Exercise',
+      frequency: 'Daily',
+    };
+  });
+  test('200: Responds with the posted habit', () => {
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(200)
+      .then(({ body: { habit } }) => {
+        expect(habit).toEqual(
+          expect.objectContaining({
+            habit_id: expect.any(Number),
+            username: 'testuser1',
+            name: 'Exercise',
+            frequency: 'Daily',
+            streak_count: 0,
+            created_at: expect.any(String),
+          })
+        );
+      });
+  });
+  test('400: Responds with "bad request" when request body is missing fields', () => {
+    delete newHabit.name;
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('400: Responds with "user not found" when passed a username that does not exist', () => {
+    newHabit.username = 'banana';
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
+});

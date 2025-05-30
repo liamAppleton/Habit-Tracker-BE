@@ -5,7 +5,7 @@ const {
   addUser,
   updateUserByUsername,
 } = require('./users.models');
-const { fetchHabits, fetchHabitById } = require('./habits.models');
+const { fetchHabits, fetchHabitById, addHabit } = require('./habits.models');
 
 module.exports = {
   fetchUsers,
@@ -15,4 +15,5 @@ module.exports = {
   updateUserByUsername,
   fetchHabits,
   fetchHabitById,
+  addHabit,
 };
