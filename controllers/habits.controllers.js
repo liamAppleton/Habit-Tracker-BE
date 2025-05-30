@@ -1,4 +1,4 @@
-const { fetchHabits, fetchHabitById } = require('../models');
+const { fetchHabits, fetchHabitById, addHabit } = require('../models');
 
 exports.getHabits = (req, res, next) => {
   fetchHabits().then((habits) => {
@@ -13,4 +13,11 @@ exports.getHabitById = (req, res, next) => {
       res.status(200).send({ habit });
     })
     .catch((err) => next(err));
+};
+
+exports.postHabit = (req, res, next) => {
+  const habit = req.body;
+  addHabit(habit).then((habit) => {
+    res.status(200).send({ habit });
+  });
 };
