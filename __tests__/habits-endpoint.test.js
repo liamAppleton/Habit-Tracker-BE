@@ -65,3 +65,32 @@ describe('GET /api/habits/:habit_id', () => {
       });
   });
 });
+
+describe('POST /api/habits', () => {
+  let newHabit;
+  beforeEach(() => {
+    newHabit = {
+      username: 'testuser1',
+      name: 'Exercise',
+      frequency: 'Daily',
+    };
+  });
+  test('200: Responds with the posted habit', () => {
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(200)
+      .then(({ body: { habit } }) => {
+        expect(habit).toEqual(
+          expect.objectContaining({
+            habit_id: expect.any(Number),
+            username: 'testuser1',
+            name: 'Exercise',
+            frequency: 'Daily',
+            streak_count: 0,
+            created_at: expect.any(String),
+          })
+        );
+      });
+  });
+});
