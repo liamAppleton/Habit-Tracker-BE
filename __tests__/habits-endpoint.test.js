@@ -93,4 +93,15 @@ describe('POST /api/habits', () => {
         );
       });
   });
+  test('400: Responds with "bad request" when request body is missing fields', () => {
+    delete newHabit.name;
+    return request(app)
+      .post('/api/habits')
+      .send(newHabit)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
