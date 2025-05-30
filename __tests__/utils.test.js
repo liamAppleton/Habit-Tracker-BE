@@ -9,4 +9,9 @@ describe('checkExists()', () => {
       expect(result).toBe(true);
     });
   });
+  test('should return false when value does not exist', () => {
+    return checkExists('users', 'username', 'banana').then((result) => {
+      expect(result).toBe(false);
+    });
+  });
 });
