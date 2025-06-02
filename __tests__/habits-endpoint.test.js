@@ -104,7 +104,7 @@ describe('POST /api/habits', () => {
         expect(body.msg).toBe('bad request');
       });
   });
-  test('400: Responds with "user not found" when passed a username that does not exist', () => {
+  test('404: Responds with "user not found" when passed a username that does not exist', () => {
     newHabit.username = 'banana';
     return request(app)
       .post('/api/habits')
@@ -113,6 +113,30 @@ describe('POST /api/habits', () => {
       .then(({ body }) => {
         expect(body.status).toBe(404);
         expect(body.msg).toBe('user not found');
+      });
+  });
+});
+
+describe('DELETE /api/habits/:habit_id', () => {
+  test('204: Responds with 204 status code', () => {
+    return request(app).delete('/api/habits/1').expect(204);
+  });
+  test('400: Responds with "bad request" when passed an invalid habit_id', () => {
+    return request(app)
+      .delete('/api/habits/banana')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('404: Responds with "habit not found" when passed a habit_id that does not exist', () => {
+    return request(app)
+      .delete('/api/habits/99999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('habit not found');
       });
   });
 });
