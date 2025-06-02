@@ -171,4 +171,13 @@ describe('DELETE /api/users/:username', () => {
   test('204: Responds with 204 status code', () => {
     return request(app).delete('/api/users/testuser1').expect(204);
   });
+  test('404: Responds with "user not found" when passed a username that does not exist', () => {
+    return request(app)
+      .delete('/api/users/banana')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('user not found');
+      });
+  });
 });
