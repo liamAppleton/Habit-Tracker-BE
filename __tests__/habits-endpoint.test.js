@@ -130,4 +130,13 @@ describe('DELETE /api/habits/:habit_id', () => {
         expect(body.msg).toBe('bad request');
       });
   });
+  test('404: Responds with "habit not found" when passed a habit_id that does not exist', () => {
+    return request(app)
+      .delete('/api/habits/99999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('habit not found');
+      });
+  });
 });
