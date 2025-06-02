@@ -37,3 +37,11 @@ exports.addHabit = ({ username, name, frequency }) => {
       return rows[0];
     });
 };
+
+exports.removeHabit = (habit_id) => {
+  return db
+    .query('DELETE FROM habits WHERE habit_id = $1', [habit_id])
+    .then(() => {
+      return;
+    });
+};
