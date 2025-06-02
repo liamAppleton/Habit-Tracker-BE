@@ -68,3 +68,11 @@ exports.updateUserByUsername = (username, body) => {
       return rows[0];
     });
 };
+
+exports.removeUser = (username) => {
+  return db
+    .query('DELETE FROM users WHERE username = $1', [username])
+    .then(() => {
+      return;
+    });
+};
