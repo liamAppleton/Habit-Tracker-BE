@@ -166,3 +166,9 @@ describe('PATCH /api/users/:username', () => {
       });
   });
 });
+
+describe('DELETE /api/users/:username', () => {
+  test('204: Responds with 204 status code', () => {
+    return request(app).delete('/api/users/testuser1').expect(204);
+  });
+});
