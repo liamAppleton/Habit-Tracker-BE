@@ -39,8 +39,13 @@ exports.addHabit = ({ username, name, frequency }) => {
 };
 
 exports.removeHabit = (habit_id) => {
-  return db
-    .query('DELETE FROM habits WHERE habit_id = $1', [habit_id])
+  return checkExists('habits', 'habit_id', habit_id)
+    .then((exists) => {
+      if (!exists) {
+        throw { status: 404, msg: 'habit not found' };
+      }
+      return db.query('DELETE FROM habits WHERE habit_id = $1', [habit_id]);
+    })
     .then(() => {
       return;
     });
