@@ -5,6 +5,7 @@ const {
   getHabitsByUsername,
   postUser,
   patchUserByUsername,
+  deleteUser,
 } = require('../controllers');
 
 usersRouter.route('/').get(getUsers).post(postUser);
@@ -12,7 +13,8 @@ usersRouter.route('/').get(getUsers).post(postUser);
 usersRouter
   .route('/:username')
   .get(getUserByUsername)
-  .patch(patchUserByUsername);
+  .patch(patchUserByUsername)
+  .delete(deleteUser);
 
 usersRouter.route('/:username/habits').get(getHabitsByUsername);
 
