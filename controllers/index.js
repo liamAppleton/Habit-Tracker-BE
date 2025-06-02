@@ -6,7 +6,12 @@ const {
   postUser,
   patchUserByUsername,
 } = require('./users.controllers');
-const { getHabits, getHabitById, postHabit } = require('./habits.controllers');
+const {
+  getHabits,
+  getHabitById,
+  postHabit,
+  deleteHabit,
+} = require('./habits.controllers');
 
 module.exports = {
   getEndpoints,
@@ -18,4 +23,5 @@ module.exports = {
   getHabits,
   getHabitById,
   postHabit,
+  deleteHabit,
 };
