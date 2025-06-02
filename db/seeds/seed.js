@@ -32,7 +32,7 @@ const createHabits = (habitData) => {
     .query(
       `CREATE TABLE habits (
         habit_id SERIAL PRIMARY KEY,
-        username VARCHAR NOT NULL REFERENCES users(username),
+        username VARCHAR NOT NULL REFERENCES users(username) ON DELETE CASCADE,
         name VARCHAR NOT NULL,
         frequency VARCHAR NOT NULL,
         streak_count INT NOT NULL,
@@ -61,7 +61,7 @@ const createHabitLogs = (habitLogData) => {
       `
     CREATE TABLE habit_logs
     (log_id SERIAL PRIMARY KEY,
-    habit_id INT NOT NULL REFERENCES habits(habit_id),
+    habit_id INT NOT NULL REFERENCES habits(habit_id) ON DELETE CASCADE,
     date VARCHAR NOT NULL,
     status VARCHAR NOT NULL)`
     )
