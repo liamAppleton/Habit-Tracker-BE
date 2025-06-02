@@ -31,7 +31,9 @@ exports.postHabit = (req, res, next) => {
 
 exports.deleteHabit = (req, res, next) => {
   const { habit_id } = req.params;
-  removeHabit(habit_id).then(() => {
-    res.status(204).send();
-  });
+  removeHabit(habit_id)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch((err) => next(err));
 };
