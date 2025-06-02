@@ -51,5 +51,7 @@ exports.patchUserByUsername = (req, res, next) => {
 
 exports.deleteUser = (req, res, next) => {
   const { username } = req.params;
-  removeUser(username).then(() => res.status(204).send());
+  removeUser(username)
+    .then(() => res.status(204).send())
+    .catch((err) => next(err));
 };

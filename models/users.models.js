@@ -1,5 +1,6 @@
 const format = require('pg-format');
 const db = require('../db/connection.js');
+const { checkExists } = require('../utils/utils.js');
 
 exports.fetchUsers = () => {
   return db.query('SELECT * FROM users').then(({ rows }) => {
@@ -70,8 +71,13 @@ exports.updateUserByUsername = (username, body) => {
 };
 
 exports.removeUser = (username) => {
-  return db
-    .query('DELETE FROM users WHERE username = $1', [username])
+  return checkExists('users', 'username', username)
+    .then((exists) => {
+      if (!exists) {
+        throw { status: 404, msg: 'user not found' };
+      }
+      return db.query('DELETE FROM users WHERE username = $1', [username]);
+    })
     .then(() => {
       return;
     });
