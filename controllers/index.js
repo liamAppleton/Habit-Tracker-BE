@@ -5,6 +5,7 @@ const {
   getHabitsByUsername,
   postUser,
   patchUserByUsername,
+  deleteUser,
 } = require('./users.controllers');
 const {
   getHabits,
@@ -20,6 +21,7 @@ module.exports = {
   getHabitsByUsername,
   postUser,
   patchUserByUsername,
+  deleteUser,
   getHabits,
   getHabitById,
   postHabit,

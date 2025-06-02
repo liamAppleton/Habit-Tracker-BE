@@ -4,6 +4,7 @@ const {
   fetchHabitsByUsername,
   addUser,
   updateUserByUsername,
+  removeUser,
 } = require('../models');
 
 exports.getUsers = (req, res, next) => {
@@ -46,4 +47,9 @@ exports.patchUserByUsername = (req, res, next) => {
       res.status(200).send({ user });
     })
     .catch((err) => next(err));
+};
+
+exports.deleteUser = (req, res, next) => {
+  const { username } = req.params;
+  removeUser(username).then(() => res.status(204).send());
 };
