@@ -52,6 +52,10 @@
     "created_at": "2025-11-17T00:00:00.000Z"
   }
   },
+  "DELETE /api/users/:username": {
+    "description": "removes the user with the selected username",
+    "exampleResponse": {}
+  },
   "GET /api/habits": {
     "description": "serves an array of all habits",
     "queries": [],
