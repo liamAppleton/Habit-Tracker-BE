@@ -12,6 +12,7 @@ const {
   addHabit,
   removeHabit,
 } = require('./habits.models');
+const { fetchHabitLogs } = require('./habitLogs.models');
 
 module.exports = {
   fetchUsers,
@@ -24,4 +25,5 @@ module.exports = {
   fetchHabitById,
   addHabit,
   removeHabit,
+  fetchHabitLogs,
 };
