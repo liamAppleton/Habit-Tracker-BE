@@ -13,6 +13,7 @@ const {
   postHabit,
   deleteHabit,
 } = require('./habits.controllers');
+const { getHabitLogs } = require('./habitLogs.controllers');
 
 module.exports = {
   getEndpoints,
@@ -26,4 +27,5 @@ module.exports = {
   getHabitById,
   postHabit,
   deleteHabit,
+  getHabitLogs,
 };
