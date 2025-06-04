@@ -100,5 +100,12 @@
     "exampleResponse": [
       { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Missed" },
       { "log_id": "log2", "habit_id": 2, "date": "2025-05-18", "status": "Completed" }
+  ]},
+  "GET /api/habit-logs/:habit_id": {
+    "description": "serves an array of habit logs for a given habit",
+    "queries": [],
+    "exampleResponse": [
+      { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Missed" },
+      { "log_id": "log2", "habit_id": 1, "date": "2025-05-18", "status": "Completed" }
   ]}
 }
