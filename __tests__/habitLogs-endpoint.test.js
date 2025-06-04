@@ -27,3 +27,41 @@ describe('GET /api/habit-logs', () => {
       });
   });
 });
+
+describe('GET /api/habit-logs/:habit_id', () => {
+  test('200: Responds with an array of habitLogs for a given habit_id', () => {
+    return request(app)
+      .get('/api/habit-logs/1')
+      .expect(200)
+      .then(({ body: { habitLogs } }) => {
+        habitLogs.forEach((habitLog) => {
+          expect(habitLog).toEqual(
+            expect.objectContaining({
+              log_id: expect.any(Number),
+              habit_id: 1,
+              date: expect.any(String),
+              status: expect.any(String),
+            })
+          );
+        });
+      });
+  });
+  test('400: Responds with "bad request" when passed an invalid habit_id', () => {
+    return request(app)
+      .get('/api/habit-logs/banana')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('400: Responds with "habit not found" when passed a habit_id that does not exist', () => {
+    return request(app)
+      .get('/api/habit-logs/99999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('habit not found');
+      });
+  });
+});
