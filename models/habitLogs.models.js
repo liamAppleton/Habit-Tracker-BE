@@ -5,3 +5,11 @@ exports.fetchHabitLogs = () => {
     return rows;
   });
 };
+
+exports.fetchHabitLogsByHabitId = (habitId) => {
+  return db
+    .query('SELECT * FROM habit_logs WHERE habit_id = $1', [habitId])
+    .then(({ rows }) => {
+      return rows;
+    });
+};
