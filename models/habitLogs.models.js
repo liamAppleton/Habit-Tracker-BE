@@ -1,5 +1,6 @@
 const db = require('../db/connection');
 const { checkExists } = require('../utils/utils');
+const format = require('pg-format');
 
 exports.fetchHabitLogs = () => {
   return db.query('SELECT * FROM habit_logs').then(({ rows }) => {
@@ -18,4 +19,18 @@ exports.fetchHabitLogsByHabitId = (habitId) => {
     .then(({ rows }) => {
       return rows;
     });
+};
+
+exports.addHabitLogByHabitId = (habitId) => {
+  const queryString = format(
+    `
+    INSERT INTO habit_logs
+    (habit_id, date, status)
+    VALUES %L RETURNING *`,
+    [[habitId, new Date(), 'Completed']]
+  );
+
+  return db.query(queryString).then(({ rows }) => {
+    return rows[0];
+  });
 };
