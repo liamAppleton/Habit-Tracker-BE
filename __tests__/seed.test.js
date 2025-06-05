@@ -213,7 +213,7 @@ describe('seed', () => {
           expect(column.data_type).toBe('integer');
         });
     });
-    test('habit_logs table has date column as varying char', () => {
+    test('habit_logs table has date column as timestamp', () => {
       return db
         .query(
           `
@@ -224,7 +224,7 @@ describe('seed', () => {
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe('date');
-          expect(column.data_type).toBe('character varying');
+          expect(column.data_type).toBe('timestamp without time zone');
         });
     });
     test('habit_logs table has status column of varying character', () => {

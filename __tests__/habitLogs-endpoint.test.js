@@ -65,3 +65,22 @@ describe('GET /api/habit-logs/:habit_id', () => {
       });
   });
 });
+
+describe('POST /api/habit-logs/:habit_id', () => {
+  test('200: Responds with the posted habit log', () => {
+    return request(app)
+      .post('/api/habit-logs/1')
+      .send({})
+      .expect(200)
+      .then(({ body: { habitLog } }) => {
+        expect(habitLog).toEqual(
+          expect.objectContaining({
+            log_id: expect.any(Number),
+            habit_id: 1,
+            date: expect.any(String),
+            status: 'Completed',
+          })
+        );
+      });
+  });
+});
