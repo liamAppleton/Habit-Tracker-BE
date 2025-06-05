@@ -21,7 +21,9 @@ exports.getHabitLogsByHabitId = (req, res, next) => {
 
 exports.postHabitLogByHabitId = (req, res, next) => {
   const { habit_id } = req.params;
-  addHabitLogByHabitId(habit_id).then((habitLog) => {
-    res.status(200).send({ habitLog });
-  });
+  addHabitLogByHabitId(habit_id)
+    .then((habitLog) => {
+      res.status(200).send({ habitLog });
+    })
+    .catch((err) => next(err));
 };
