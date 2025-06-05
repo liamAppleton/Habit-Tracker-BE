@@ -1,8 +1,15 @@
 const habitLogsRouter = require('express').Router();
-const { getHabitLogs, getHabitLogsByHabitId } = require('../controllers');
+const {
+  getHabitLogs,
+  getHabitLogsByHabitId,
+  postHabitLogByHabitId,
+} = require('../controllers');
 
 habitLogsRouter.route('/').get(getHabitLogs);
 
-habitLogsRouter.route('/:habit_id').get(getHabitLogsByHabitId);
+habitLogsRouter
+  .route('/:habit_id')
+  .get(getHabitLogsByHabitId)
+  .post(postHabitLogByHabitId);
 
 module.exports = habitLogsRouter;

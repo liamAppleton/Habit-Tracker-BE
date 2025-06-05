@@ -62,7 +62,7 @@ const createHabitLogs = (habitLogData) => {
     CREATE TABLE habit_logs
     (log_id SERIAL PRIMARY KEY,
     habit_id INT NOT NULL REFERENCES habits(habit_id) ON DELETE CASCADE,
-    date VARCHAR NOT NULL,
+    date TIMESTAMP NOT NULL,
     status VARCHAR NOT NULL)`
     )
     .then(() => {
