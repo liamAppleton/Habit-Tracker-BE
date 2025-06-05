@@ -3,7 +3,7 @@ module.exports = [
     log_id: 'log1',
     habit_id: 1,
     date: '2025-05-18T00:00:00.000Z',
-    status: 'Missed',
+    status: 'Completed',
   },
   {
     log_id: 'log2',

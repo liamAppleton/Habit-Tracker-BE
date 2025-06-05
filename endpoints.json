@@ -98,14 +98,18 @@
     "description": "serves an array of all habit logs",
     "queries": [],
     "exampleResponse": [
-      { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Missed" },
+      { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Completed" },
       { "log_id": "log2", "habit_id": 2, "date": "2025-05-18", "status": "Completed" }
   ]},
   "GET /api/habit-logs/:habit_id": {
     "description": "serves an array of habit logs for a given habit",
     "queries": [],
     "exampleResponse": [
-      { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Missed" },
+      { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Completed" },
       { "log_id": "log2", "habit_id": 1, "date": "2025-05-18", "status": "Completed" }
-  ]}
+  ]},
+  "POST /api/habit-logs/:habit_id": {
+    "description": "adds a log to the database and responds with the added log",
+    "exampleResponse": { "log_id": "log1", "habit_id": 1, "date": "2025-05-18", "status": "Completed" }
+  }
 }
