@@ -93,4 +93,14 @@ describe('POST /api/habit-logs/:habit_id', () => {
         expect(body.msg).toBe('bad request');
       });
   });
+  test('400: Responds with "habit not found" when passed a habit_id that does not exist', () => {
+    return request(app)
+      .post('/api/habit-logs/99999')
+      .send({})
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('habit not found');
+      });
+  });
 });
