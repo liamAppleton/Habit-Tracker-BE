@@ -22,15 +22,20 @@ exports.fetchHabitLogsByHabitId = (habitId) => {
 };
 
 exports.addHabitLogByHabitId = (habitId) => {
-  const queryString = format(
-    `
+  return checkExists('habits', 'habit_id', habitId)
+    .then((exists) => {
+      if (!exists) throw { status: 404, msg: 'habit not found' };
+      const queryString = format(
+        `
     INSERT INTO habit_logs
     (habit_id, date, status)
     VALUES %L RETURNING *`,
-    [[habitId, new Date(), 'Completed']]
-  );
+        [[habitId, new Date(), 'Completed']]
+      );
 
-  return db.query(queryString).then(({ rows }) => {
-    return rows[0];
-  });
+      return db.query(queryString);
+    })
+    .then(({ rows }) => {
+      return rows[0];
+    });
 };
