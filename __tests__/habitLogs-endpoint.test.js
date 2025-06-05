@@ -83,4 +83,14 @@ describe('POST /api/habit-logs/:habit_id', () => {
         );
       });
   });
+  test('400: Responds with "bad request" when passed an invalid habit_id', () => {
+    return request(app)
+      .post('/api/habit-logs/banana')
+      .send({})
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
