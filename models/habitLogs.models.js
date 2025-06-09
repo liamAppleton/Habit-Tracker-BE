@@ -40,9 +40,12 @@ exports.addHabitLogByHabitId = (habitId) => {
     });
 };
 
-exports.removeHabitLog = (logId) => {
-  return db
-    .query('DELETE FROM habit_logs WHERE log_id = $1', [logId])
+exports.removeHabitLog = (habitId, logId) => {
+  return checkExists('habits', 'habit_id', habitId)
+    .then((exists) => {
+      if (!exists) throw { status: 404, msg: 'habit not found' };
+      return db.query('DELETE FROM habit_logs WHERE log_id = $1', [logId]);
+    })
     .then(() => {
       return;
     });
