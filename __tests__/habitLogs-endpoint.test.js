@@ -101,3 +101,9 @@ describe('POST /api/habit-logs/:habit_id', () => {
       });
   });
 });
+
+describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
+  test('204: Responds with 204 status code', () => {
+    return request(app).delete('/api/habit-logs/1/1').expect(204);
+  });
+});
