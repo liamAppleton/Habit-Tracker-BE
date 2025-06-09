@@ -62,19 +62,16 @@ const createHabitLogs = (habitLogData) => {
     CREATE TABLE habit_logs
     (log_id SERIAL PRIMARY KEY,
     habit_id INT NOT NULL REFERENCES habits(habit_id) ON DELETE CASCADE,
-    date TIMESTAMP NOT NULL,
-    status VARCHAR NOT NULL)`
+    date TIMESTAMP NOT NULL)`
     )
     .then(() => {
-      const formattedHabitLogs = habitLogData.map(
-        ({ habit_id, date, status }) => {
-          return [habit_id, date, status];
-        }
-      );
+      const formattedHabitLogs = habitLogData.map(({ habit_id, date }) => {
+        return [habit_id, date];
+      });
       const queryString = format(
         `
           INSERT INTO habit_logs
-        (habit_id, date, status)
+        (habit_id, date)
         VALUES %L RETURNING *`,
         formattedHabitLogs
       );
