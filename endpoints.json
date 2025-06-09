@@ -111,5 +111,9 @@
   "POST /api/habit-logs/:habit_id": {
     "description": "adds a log to the database and responds with the added log",
     "exampleResponse": { "log_id": "log1", "habit_id": 1, "date": "2025-05-18" }
+  },
+  "DELETE /api/habit-logs/:habit_id/:log_id": {
+    "description": "removes the log with the selected id",
+    "exampleResponse": {}
   }
 }
