@@ -115,7 +115,7 @@ describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
         expect(body.msg).toBe('bad request');
       });
   });
-  test('404: Responds with "habit not found" when passed an invalid habit_id', () => {
+  test('404: Responds with "habit not found" when passed a habit_id that does not exist', () => {
     return request(app)
       .delete('/api/habit-logs/99999/1')
       .expect(404)
@@ -131,6 +131,15 @@ describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
       .then(({ body }) => {
         expect(body.status).toBe(400);
         expect(body.msg).toBe('bad request');
+      });
+  });
+  test('404: Responds with "log not found" when passed a log_id that does not exist', () => {
+    return request(app)
+      .delete('/api/habit-logs/1/99999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('log not found');
       });
   });
 });
