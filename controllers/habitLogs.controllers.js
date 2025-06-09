@@ -30,8 +30,10 @@ exports.postHabitLogByHabitId = (req, res, next) => {
 };
 
 exports.deleteHabitLog = (req, res, next) => {
-  const { log_id } = req.params;
-  removeHabitLog(log_id).then(() => {
-    res.status(204).send();
-  });
+  const { habit_id, log_id } = req.params;
+  removeHabitLog(habit_id, log_id)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch((err) => next(err));
 };
