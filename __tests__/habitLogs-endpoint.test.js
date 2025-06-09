@@ -101,3 +101,45 @@ describe('POST /api/habit-logs/:habit_id', () => {
       });
   });
 });
+
+describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
+  test('204: Responds with 204 status code', () => {
+    return request(app).delete('/api/habit-logs/1/1').expect(204);
+  });
+  test('400: Responds with "bad request" when passed an invalid habit_id', () => {
+    return request(app)
+      .delete('/api/habit-logs/banana/1')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('404: Responds with "habit not found" when passed a habit_id that does not exist', () => {
+    return request(app)
+      .delete('/api/habit-logs/99999/1')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('habit not found');
+      });
+  });
+  test('400: Responds with "bad request" when passed an invalid log_id', () => {
+    return request(app)
+      .delete('/api/habit-logs/1/banana')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
+  test('404: Responds with "log not found" when passed a log_id that does not exist', () => {
+    return request(app)
+      .delete('/api/habit-logs/1/99999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.status).toBe(404);
+        expect(body.msg).toBe('log not found');
+      });
+  });
+});

@@ -2,6 +2,7 @@ const {
   fetchHabitLogs,
   fetchHabitLogsByHabitId,
   addHabitLogByHabitId,
+  removeHabitLog,
 } = require('../models');
 
 exports.getHabitLogs = (req, res, next) => {
@@ -24,6 +25,15 @@ exports.postHabitLogByHabitId = (req, res, next) => {
   addHabitLogByHabitId(habit_id)
     .then((habitLog) => {
       res.status(200).send({ habitLog });
+    })
+    .catch((err) => next(err));
+};
+
+exports.deleteHabitLog = (req, res, next) => {
+  const { habit_id, log_id } = req.params;
+  removeHabitLog(habit_id, log_id)
+    .then(() => {
+      res.status(204).send();
     })
     .catch((err) => next(err));
 };

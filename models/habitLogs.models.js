@@ -39,3 +39,23 @@ exports.addHabitLogByHabitId = (habitId) => {
       return rows[0];
     });
 };
+
+exports.removeHabitLog = (habitId, logId) => {
+  const promises = [
+    checkExists('habits', 'habit_id', habitId),
+    checkExists('habit_logs', 'log_id', logId),
+  ];
+
+  return Promise.all(promises)
+    .then(([habitExists, logExists]) => {
+      if (!habitExists || !logExists)
+        throw {
+          status: 404,
+          msg: `${!habitExists ? 'habit' : 'log'} not found`,
+        };
+      return db.query('DELETE FROM habit_logs WHERE log_id = $1', [logId]);
+    })
+    .then(() => {
+      return;
+    });
+};
