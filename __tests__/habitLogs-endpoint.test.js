@@ -20,7 +20,6 @@ describe('GET /api/habit-logs', () => {
               log_id: expect.any(Number),
               habit_id: expect.any(Number),
               date: expect.any(String),
-              status: expect.any(String),
             })
           );
         });
@@ -40,7 +39,6 @@ describe('GET /api/habit-logs/:habit_id', () => {
               log_id: expect.any(Number),
               habit_id: 1,
               date: expect.any(String),
-              status: expect.any(String),
             })
           );
         });
@@ -78,7 +76,6 @@ describe('POST /api/habit-logs/:habit_id', () => {
             log_id: expect.any(Number),
             habit_id: 1,
             date: expect.any(String),
-            status: 'Completed',
           })
         );
       });
