@@ -17,6 +17,7 @@ const {
   getHabitLogs,
   getHabitLogsByHabitId,
   postHabitLogByHabitId,
+  deleteHabitLog,
 } = require('./habitLogs.controllers');
 
 module.exports = {
@@ -34,4 +35,5 @@ module.exports = {
   getHabitLogs,
   getHabitLogsByHabitId,
   postHabitLogByHabitId,
+  deleteHabitLog,
 };
