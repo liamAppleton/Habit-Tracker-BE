@@ -106,4 +106,13 @@ describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
   test('204: Responds with 204 status code', () => {
     return request(app).delete('/api/habit-logs/1/1').expect(204);
   });
+  test('400: Responds with "bad request" when passed an invalid habit_id', () => {
+    return request(app)
+      .delete('/api/habit-logs/banana/1')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
