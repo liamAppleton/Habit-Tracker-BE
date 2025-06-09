@@ -227,19 +227,5 @@ describe('seed', () => {
           expect(column.data_type).toBe('timestamp without time zone');
         });
     });
-    test('habit_logs table has status column of varying character', () => {
-      return db
-        .query(
-          `
-            SELECT column_name, data_type, column_default
-            FROM information_schema.columns
-            WHERE table_name = 'habit_logs'
-            AND column_name = 'status'`
-        )
-        .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe('status');
-          expect(column.data_type).toBe('character varying');
-        });
-    });
   });
 });

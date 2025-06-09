@@ -28,9 +28,9 @@ exports.addHabitLogByHabitId = (habitId) => {
       const queryString = format(
         `
     INSERT INTO habit_logs
-    (habit_id, date, status)
+    (habit_id, date)
     VALUES %L RETURNING *`,
-        [[habitId, new Date(), 'Completed']]
+        [[habitId, new Date()]]
       );
 
       return db.query(queryString);
