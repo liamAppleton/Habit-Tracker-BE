@@ -39,3 +39,11 @@ exports.addHabitLogByHabitId = (habitId) => {
       return rows[0];
     });
 };
+
+exports.removeHabitLog = (logId) => {
+  return db
+    .query('DELETE FROM habit_logs WHERE log_id = $1', [logId])
+    .then(() => {
+      return;
+    });
+};
