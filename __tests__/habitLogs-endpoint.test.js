@@ -124,4 +124,13 @@ describe('DELETE /api/habit-logs/:habit_id/:log_id', () => {
         expect(body.msg).toBe('habit not found');
       });
   });
+  test('400: Responds with "bad request" when passed an invalid log_id', () => {
+    return request(app)
+      .delete('/api/habit-logs/1/banana')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.status).toBe(400);
+        expect(body.msg).toBe('bad request');
+      });
+  });
 });
