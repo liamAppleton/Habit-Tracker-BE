@@ -43,6 +43,7 @@ describe('GET /api/habits/:habit_id', () => {
           frequency: 'Daily',
           streak_count: 5,
           created_at: '2025-11-20T00:00:00.000Z',
+          colour: '#FFFFFF',
         });
       });
   });
@@ -73,6 +74,7 @@ describe('POST /api/habits', () => {
       username: 'testuser1',
       name: 'Exercise',
       frequency: 'Daily',
+      colour: '#FFFFFF',
     };
   });
   test('200: Responds with the posted habit', () => {
@@ -89,6 +91,7 @@ describe('POST /api/habits', () => {
             frequency: 'Daily',
             streak_count: 0,
             created_at: expect.any(String),
+            colour: '#FFFFFF',
           })
         );
       });
