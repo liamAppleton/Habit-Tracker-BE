@@ -36,18 +36,19 @@ const createHabits = (habitData) => {
         name VARCHAR NOT NULL,
         frequency VARCHAR NOT NULL,
         streak_count INT NOT NULL,
-        created_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL,
+        colour VARCHAR(7) NOT NULL
 );`
     )
     .then(() => {
       const formattedHabits = habitData.map(
-        ({ username, name, frequency, streak_count, created_at }) => {
-          return [username, name, frequency, streak_count, created_at];
+        ({ username, name, frequency, streak_count, created_at, colour }) => {
+          return [username, name, frequency, streak_count, created_at, colour];
         }
       );
       const queryString = format(
         `INSERT INTO habits
-          (username, name, frequency, streak_count, created_at)
+          (username, name, frequency, streak_count, created_at, colour)
           VALUES %L RETURNING *`,
         formattedHabits
       );
