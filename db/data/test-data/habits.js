@@ -6,6 +6,7 @@ module.exports = [
     frequency: 'Daily',
     streak_count: 5,
     created_at: '2025-11-20T00:00:00.000Z',
+    colour: '#FFFFFF',
   },
   {
     habit_id: 2,
@@ -14,5 +15,6 @@ module.exports = [
     frequency: 'Weekly',
     streak_count: 0,
     created_at: '2025-11-23T00:00:00.000Z',
+    colour: '#FFFFFF',
   },
 ];
