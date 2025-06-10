@@ -17,13 +17,13 @@ exports.fetchHabitById = (habit_id) => {
     });
 };
 
-exports.addHabit = ({ username, name, frequency }) => {
+exports.addHabit = ({ username, name, frequency, colour }) => {
   const queryString = format(
     `
     INSERT INTO habits
-  (username, name, frequency, streak_count, created_at)
+  (username, name, frequency, streak_count, created_at, colour)
   VALUES %L RETURNING *`,
-    [[username, name, frequency, 0, new Date()]]
+    [[username, name, frequency, 0, new Date(), colour]]
   );
 
   return checkExists('users', 'username', username)
